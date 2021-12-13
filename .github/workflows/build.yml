@@ -7,14 +7,14 @@ jobs:
   make-image:
     runs-on: ubuntu-latest
       name: checkout
-      - uses: actions/checkout@v2
-      - uses: actions/setup-go@v2
+      uses: actions/checkout@v2
+      uses: actions/setup-go@v2
         with:
           go-version: '1.9.3'
         run: |
               sudo go build -o /usr/lib/apt/methods/oci ./cmd/usr-lib-apt-methods-oci
-      - name: Publish Release
-        uses: softprops/action-gh-release@v1
+      name: Publish Release
+      uses: softprops/action-gh-release@v1
         with:
           name: ${{ steps.vars.outputs.tag }}
           draft: false
