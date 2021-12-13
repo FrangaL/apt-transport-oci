@@ -7,13 +7,6 @@ jobs:
   make-image:
     runs-on: ubuntu-latest
     name: apt-oci-builder
-    steps:
-      - name: Set up QEMU
-        id: qemu
-        uses: docker/setup-qemu-action@v1
-        with:
-          image: tonistiigi/binfmt:latest
-          platforms: all
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
         with:
