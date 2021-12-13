@@ -1,0 +1,30 @@
+name: apt-transport-oci
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  make-image:
+    runs-on: ubuntu-latest
+    name: apt-transport-oci
+    steps:
+      - name: Set up QEMU
+        id: qemu
+        uses: docker/setup-qemu-action@v1
+        with:
+          image: tonistiigi/binfmt:latest
+          platforms: all
+        - uses: actions/checkout@master
+        - uses: actions/setup-go@v2
+          with:
+            go-version: '1.9.3'
+        - run: |
+              sudo apt-get update
+              sudo go build -o /usr/lib/apt/methods/oci ./cmd/usr-lib-apt-methods-oci
+
+      - name: Publish Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ steps.vars.outputs.tag }}
+          draft: false
+          files: ${{ matrix.DISTRO }}-${{ matrix.SUITE }}-${{ matrix.VARIANT }}-${{ matrix.ARCH }}.img.*
