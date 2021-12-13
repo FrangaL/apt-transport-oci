@@ -6,7 +6,6 @@ on:
 jobs:
   make-image:
     runs-on: ubuntu-latest
-    name: apt-oci-builder
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
         with:
