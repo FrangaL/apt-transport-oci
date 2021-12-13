@@ -24,7 +24,7 @@ jobs:
             sudo go build -o /usr/lib/apt/methods/oci ./cmd/usr-lib-apt-methods-oci
       - name: Publish Release
         uses: softprops/action-gh-release@v1
-          with:
-            name: ${{ steps.vars.outputs.tag }}
-            draft: false
-            files: /usr/lib/apt/methods/oci
+        with:
+          name: ${{ steps.vars.outputs.tag }}
+          draft: false
+          files: /usr/lib/apt/methods/oci
