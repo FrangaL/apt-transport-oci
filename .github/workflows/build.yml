@@ -17,6 +17,7 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
+      - name: Gooo
         uses: actions/setup-go@v2
         with:
           go-version: '1.9.3'
