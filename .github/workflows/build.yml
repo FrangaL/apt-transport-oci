@@ -7,7 +7,7 @@ on:
 
 jobs:
   compile:
-    name: Go OCI
+    name: APT transport OCI
     runs-on: ubuntu-latest
     steps:
       - name: Gooo
@@ -16,11 +16,14 @@ jobs:
           go-version: '1.9.3'
       - name: Check out the repo
         uses: actions/checkout@v2
-      - name: Build
-        run: sudo go build -o /usr/lib/apt/methods/oci ./cmd/usr-lib-apt-methods-oci
+      - name: Build app
+        run: |
+          sudo go build -o /usr/lib/apt/methods/oci ./cmd/usr-lib-apt-methods-oci
+          sudo chmod +x /usr/lib/apt/methods/oci
+          sudo xz /usr/lib/apt/methods/oci
       - name: Publish Release
         uses: softprops/action-gh-release@v1
         with:
           name: ${{ steps.vars.outputs.tag }}
           draft: false
-          files: /usr/lib/apt/methods/oci
+          files: /usr/lib/apt/methods/oci.xz
