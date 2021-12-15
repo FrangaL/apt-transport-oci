@@ -16,7 +16,8 @@ jobs:
           go-version: '1.9.3'
       - name: Check out the repo
         uses: actions/checkout@v2
-          run: sudo go build -o /usr/lib/apt/methods/oci ./cmd/usr-lib-apt-methods-oci
+      - name: Build
+        run: sudo go build -o /usr/lib/apt/methods/oci ./cmd/usr-lib-apt-methods-oci
       - name: Publish Release
         uses: softprops/action-gh-release@v1
         with:
