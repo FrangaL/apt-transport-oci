@@ -2,13 +2,8 @@ name: apt-transport-oci
 
 on:
   push:
-    branches:
-      - master
-    paths-ignore:
-      - '**.md'
-  pull_request:
-    paths-ignore:
-    - '**.md'
+    tags:
+      - 'v*'
 
 jobs:
   compile:
@@ -20,7 +15,7 @@ jobs:
       - name: Gooo
         uses: actions/setup-go@v2
         with:
-          go-version: '1.9.3'
+          go-version: 'stable'
           run: sudo go build -o /usr/lib/apt/methods/oci ./cmd/usr-lib-apt-methods-oci
       - name: Publish Release
         uses: softprops/action-gh-release@v1
